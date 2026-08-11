@@ -1,7 +1,8 @@
-package controller;
+package com.example.demo.controller;
 
-import entity.Account;
-import service.AccountService;
+import com.example.demo.dto.TransferRequest;
+import com.example.demo.entity.Account;
+import com.example.demo.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -30,5 +31,12 @@ public class AccountController {
     @GetMapping("/{id}")
     public Account hesapBul(@PathVariable UUID id) {
         return accountService.hesapBul(id);
+    }
+
+    @PostMapping("/transfer")
+    public void paraTransferi(@RequestBody TransferRequest transferRequest) {
+
+        accountService.paraTransferi(transferRequest.getGonderenID(), transferRequest.getAlanID(), transferRequest.getMiktar());
+
     }
 }

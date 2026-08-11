@@ -1,8 +1,8 @@
-package controller;
+package com.example.demo.controller;
 
-import entity.CreditCard;
+import com.example.demo.entity.CreditCard;
 import org.springframework.web.bind.annotation.*;
-import service.CreditCardService;
+import com.example.demo.service.CreditCardService;
 import java.util.List;
 import java.util.UUID;
 

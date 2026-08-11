@@ -1,4 +1,4 @@
-package entity;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,8 +11,8 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "credit_cards")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreditCard {
 
     @Id

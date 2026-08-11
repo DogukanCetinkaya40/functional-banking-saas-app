@@ -1,8 +1,10 @@
-package controller;
+package com.example.demo.controller;
 
-import entity.User;
+import com.example.demo.dto.UserResponse;
+import com.example.demo.dto.UserSaveRequest;
+import com.example.demo.entity.User;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import com.example.demo.service.UserService;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,14 +20,14 @@ public class UserController {
     }
 
     @PostMapping
-    public User kullaniciOlustur(@RequestBody User user) {
+    public UserResponse kullaniciOlustur(@RequestBody UserSaveRequest userSaveRequest) {
 
-        return userService.kullaniciOlustur(user);
+        return userService.kullaniciOlustur(userSaveRequest);
 
     }
 
     @GetMapping
-    public List<User> tumKullanicilar() {
+    public List<UserResponse> tumKullanicilar() {
 
         return userService.tumKullanicilar();
 

@@ -1,8 +1,8 @@
-package service;
+package com.example.demo.service;
 
-import entity.CreditCard;
+import com.example.demo.entity.CreditCard;
 import org.springframework.stereotype.Service;
-import repository.CreditCardRepository;
+import com.example.demo.repository.CreditCardRepository;
 
 import java.util.List;
 import java.util.UUID;
