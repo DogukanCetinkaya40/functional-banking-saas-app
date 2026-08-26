@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AccountResponse;
+import com.example.demo.dto.AccountSaveRequest;
 import com.example.demo.dto.TransferRequest;
-import com.example.demo.entity.Account;
 import com.example.demo.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -18,18 +19,18 @@ public class AccountController {
     }
 
     @PostMapping
-    public Account hesapOlustur(@RequestBody Account account) {
-        return accountService.hesapOlustur(account);
+    public AccountResponse hesapOlustur(@RequestBody AccountSaveRequest accountSaveRequest) {
+        return accountService.hesapOlustur(accountSaveRequest);
     }
 
     @GetMapping
-    public List<Account> tumHesaplariGetir() {
+    public List<AccountResponse> tumHesaplariGetir() {
         return accountService.tumHesaplariGetir();
     }
 
     // 3. ID'ye Göre Hesap Getir (GET http://localhost:8080/accounts/1)
     @GetMapping("/{id}")
-    public Account hesapBul(@PathVariable UUID id) {
+    public AccountResponse hesapBul(@PathVariable UUID id) {
         return accountService.hesapBul(id);
     }
 

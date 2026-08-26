@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.CreditCard;
+import com.example.demo.dto.CreditCardResponse;
+import com.example.demo.dto.CreditCardSaveRequest;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.service.CreditCardService;
 import java.util.List;
@@ -17,17 +18,17 @@ public class CreditCardController {
     }
 
     @PostMapping
-    public CreditCard kartOlustur(@RequestBody CreditCard creditCard) {
-        return creditCardService.kartOlustur(creditCard);
+    public CreditCardResponse kartOlustur(@RequestBody CreditCardSaveRequest creditCardSaveRequest) {
+        return creditCardService.kartOlustur(creditCardSaveRequest);
     }
 
     @GetMapping
-    public List<CreditCard> tumKartlar() {
+    public List<CreditCardResponse> tumKartlar() {
         return creditCardService.tumKartlar();
     }
 
     @GetMapping("/{id}")
-    public CreditCard kartBul(@PathVariable UUID id) {
+    public CreditCardResponse kartBul(@PathVariable UUID id) {
         return creditCardService.kartBul(id);
     }
 

@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AccountResponse;
+import com.example.demo.dto.AccountSaveRequest;
+import com.example.demo.mapper.AccountMapper;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.entity.Account;
@@ -13,24 +16,33 @@ import java.util.UUID;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final AccountMapper accountMapper;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountMapper accountMapper, AccountRepository accountRepository) {
+
+        this.accountMapper = accountMapper;
         this.accountRepository = accountRepository;
     }
 
-    public Account hesapOlustur(Account account) {
+    public AccountResponse hesapOlustur(AccountSaveRequest accountSaveRequest) {
 
-        return accountRepository.save(account);
+        Account account = accountMapper.toEntity(accountSaveRequest);
+        Account savedAccount = accountRepository.save(account);
+
+        return accountMapper.toResponse(savedAccount);
     }
 
-    public List<Account> tumHesaplariGetir() {
+    public List<AccountResponse> tumHesaplariGetir() {
 
-        return accountRepository.findAll();
+        List<Account> accountList = accountRepository.findAll();
+        return accountMapper.toResponseList(accountList);
     }
 
-    public Account hesapBul (UUID id) {
-        return accountRepository.findById(id)
+    public AccountResponse hesapBul (UUID id) {
+        Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Şu ID sorgusuna ait hesap bulunamadı: " + id));
+
+        return accountMapper.toResponse(account);
     }
 
     @Transactional

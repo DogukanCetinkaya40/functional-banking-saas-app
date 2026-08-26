@@ -21,8 +21,9 @@ public class CreditCard {
 
     private String kart_No;
     private String son_Tarih;
-    private int cvv;
+    private String cvv;
     private BigDecimal kart_Limit;
+    private BigDecimal guncel_Borc;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

@@ -42,10 +42,12 @@ public class UserService {
 
     }
 
-    public User kullaniciBul(UUID id) {
+    public UserResponse kullaniciBul(UUID id) {
 
-        return userRepository.findById(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Girdiğiniz ID'ye uygun kullanıcı bulunamadı."));
+
+        return convertToResponse(user);
 
     }
 

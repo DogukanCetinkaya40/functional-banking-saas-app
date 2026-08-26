@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User kullaniciBul(@PathVariable UUID id) {
+    public UserResponse kullaniciBul(@PathVariable UUID id) {
 
         return userService.kullaniciBul(id);
 
