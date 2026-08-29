@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.UserResponse;
 import com.example.demo.dto.UserSaveRequest;
 import com.example.demo.entity.User;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.service.UserService;
 
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponse kullaniciOlustur(@RequestBody UserSaveRequest userSaveRequest) {
+    public UserResponse kullaniciOlustur(@Valid @RequestBody UserSaveRequest userSaveRequest) {
 
         return userService.kullaniciOlustur(userSaveRequest);
 

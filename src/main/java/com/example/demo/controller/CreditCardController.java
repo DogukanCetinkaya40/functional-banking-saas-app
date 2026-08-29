@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CreditCardResponse;
 import com.example.demo.dto.CreditCardSaveRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.service.CreditCardService;
 import java.util.List;
@@ -18,7 +19,7 @@ public class CreditCardController {
     }
 
     @PostMapping
-    public CreditCardResponse kartOlustur(@RequestBody CreditCardSaveRequest creditCardSaveRequest) {
+    public CreditCardResponse kartOlustur(@Valid @RequestBody CreditCardSaveRequest creditCardSaveRequest) {
         return creditCardService.kartOlustur(creditCardSaveRequest);
     }
 

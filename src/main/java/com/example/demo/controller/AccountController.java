@@ -4,6 +4,7 @@ import com.example.demo.dto.AccountResponse;
 import com.example.demo.dto.AccountSaveRequest;
 import com.example.demo.dto.TransferRequest;
 import com.example.demo.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +20,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public AccountResponse hesapOlustur(@RequestBody AccountSaveRequest accountSaveRequest) {
+    public AccountResponse hesapOlustur(@Valid @RequestBody AccountSaveRequest accountSaveRequest) {
         return accountService.hesapOlustur(accountSaveRequest);
     }
 

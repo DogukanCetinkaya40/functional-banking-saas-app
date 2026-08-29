@@ -56,6 +56,9 @@ public class AccountService {
 
         if (gonderen.getBakiye().compareTo(miktar) < 0) {throw new IllegalArgumentException("İşlem tamamlanamadı, sebebi: Yetersiz gönderen bakiyesi.");}
 
+        if (gonderen.getIban().equals(alan.getIban())) {
+            throw new RuntimeException("Kendi hesabınıza para gönderemezsiniz!");
+        }
         gonderen.setBakiye(gonderen.getBakiye().subtract(miktar));
         alan.setBakiye(alan.getBakiye().add(miktar));
 
