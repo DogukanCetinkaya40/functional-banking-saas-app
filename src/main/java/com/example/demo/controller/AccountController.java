@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.dto.AccountResponse;
 import com.example.demo.dto.AccountSaveRequest;
 import com.example.demo.dto.TransferRequest;
+import com.example.demo.dto.TransferResponse;
 import com.example.demo.service.AccountService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -36,9 +38,10 @@ public class AccountController {
     }
 
     @PostMapping("/transfer")
-    public void paraTransferi(@RequestBody TransferRequest transferRequest) {
+    public ResponseEntity<TransferResponse> paraTransferi(@Valid @RequestBody TransferRequest request) {
 
-        accountService.paraTransferi(transferRequest.getGonderenID(), transferRequest.getAlanID(), transferRequest.getMiktar());
+        TransferResponse response = accountService.paraTransferi(request);
 
+        return ResponseEntity.ok(response);
     }
 }

@@ -20,7 +20,18 @@ public class GlobalExceptionHandler {
 
         manve.getBindingResult().getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
 
-            return errors;
+        return errors;
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> businessExceptionHandler(BusinessException be) {
+
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("Hata:" , be.getMessage());
+
+        return errors;
     }
 
 }

@@ -13,16 +13,21 @@ import java.util.UUID;
 @Table(name = "credit_cards")
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditCard {
+public class CreditCard extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+    @Column(nullable = false)
     private String kart_No;
+
+    @Column(nullable = false)
     private String son_Tarih;
+
+    @Column(nullable = false)
     private String cvv;
+
+    @Column(nullable = false)
     private BigDecimal kart_Limit;
+
+    @Column(nullable = false)
     private BigDecimal guncel_Borc;
 
     @ManyToOne

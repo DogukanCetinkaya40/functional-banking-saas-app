@@ -19,7 +19,7 @@ public interface CreditCardMapper {
     @Mapping(target = "account", ignore = true)
     CreditCard toEntity(CreditCardSaveRequest creditCardSaveRequest);
 
-    @Mapping(target = "kart_No", expression = "java(creditCardMasker(CreditCard.getKart_No()))")
+    @Mapping(target = "kart_No", expression = "java(creditCardMasker(creditCard.getKart_No()))")
     CreditCardResponse toResponse(CreditCard creditCard);
 
     List<CreditCardResponse> toResponseList(List<CreditCard> creditCardList);

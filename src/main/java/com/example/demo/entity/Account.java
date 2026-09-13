@@ -11,14 +11,15 @@ import lombok.*;
 @Table(name = "accounts")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+public class Account extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+    @Column(nullable = false)
     private String iban;
+
+    @Column(nullable = false)
     private BigDecimal bakiye;
+
+    @Column(nullable = false)
     private String doviz;
 
     @ManyToOne
