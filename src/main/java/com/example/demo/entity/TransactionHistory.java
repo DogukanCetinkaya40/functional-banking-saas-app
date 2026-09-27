@@ -36,6 +36,9 @@ public class TransactionHistory extends BaseEntity {
     @Column(nullable = false, updatable = false)
     private String islemTipi;
 
+    @Column(nullable = false, updatable = false)
+    private String doviz;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime islemTarihi;

@@ -1,15 +1,16 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.AccountResponse;
-import com.example.demo.dto.AccountSaveRequest;
-import com.example.demo.dto.TransferRequest;
-import com.example.demo.dto.TransferResponse;
+import com.example.demo.dto.*;
 import com.example.demo.entity.TransactionHistory;
 import com.example.demo.exception.BusinessException;
 import com.example.demo.mapper.AccountMapper;
+import com.example.demo.mapper.TransactionMapper;
 import com.example.demo.repository.TransactionHistoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.entity.Account;
@@ -25,12 +26,14 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
     private final TransactionHistoryRepository transactionHistoryRepository;
+    private final TransactionMapper transactionMapper;
 
-    public AccountService(AccountMapper accountMapper, AccountRepository accountRepository, TransactionHistoryRepository transactionHistoryRepository) {
+    public AccountService(AccountMapper accountMapper, AccountRepository accountRepository, TransactionHistoryRepository transactionHistoryRepository, TransactionMapper transactionMapper) {
 
         this.accountMapper = accountMapper;
         this.accountRepository = accountRepository;
         this.transactionHistoryRepository = transactionHistoryRepository;
+        this.transactionMapper = transactionMapper;
     }
 
     public AccountResponse hesapOlustur(AccountSaveRequest accountSaveRequest) {
@@ -101,6 +104,18 @@ public class AccountService {
                 .islemTarihi(history.getIslemTarihi())
                 .build();
 
+    }
+
+    public Page<TransactionDto> hesapGecmisi(UUID accountId, int page, int size) {
+
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new BusinessException("Hesap bulunamadı!"));
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("islemTarihi").descending());
+
+        Page<TransactionHistory> islemGecmisiSayfasi = transactionHistoryRepository.findByGonderenHesapIdOrAliciHesapId(accountId, accountId, pageable);
+
+        return islemGecmisiSayfasi.map(islem -> transactionMapper.toDto(islem, accountId));
     }
 
 }

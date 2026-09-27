@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.validation.ValidIban;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -12,6 +14,7 @@ import java.util.UUID;
 public class TransferRequest {
 
     @NotBlank(message = "Alıcı ibanı boş bırakılamaz!")
+    @ValidIban
     private String alanIban;
 
     @NotNull(message = "Gönderen kişi ID bulunamadı!")
@@ -19,6 +22,7 @@ public class TransferRequest {
 
     @NotNull(message = "Lütfen geçerli bir miktar giriniz.")
     @Positive(message = "Transfer edilen para miktarı negatif olamaz!")
+    @Digits(integer = 12,fraction = 2)
     private BigDecimal miktar;
 
 }

@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AccountResponse;
-import com.example.demo.dto.AccountSaveRequest;
-import com.example.demo.dto.TransferRequest;
-import com.example.demo.dto.TransferResponse;
+import com.example.demo.dto.*;
 import com.example.demo.service.AccountService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -31,7 +29,6 @@ public class AccountController {
         return accountService.tumHesaplariGetir();
     }
 
-    // 3. ID'ye Göre Hesap Getir (GET http://localhost:8080/accounts/1)
     @GetMapping("/{id}")
     public AccountResponse hesapBul(@PathVariable UUID id) {
         return accountService.hesapBul(id);
@@ -43,5 +40,14 @@ public class AccountController {
         TransferResponse response = accountService.paraTransferi(request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}{ekstre}")
+    public ResponseEntity<Page<TransactionDto>> hesapEkstresi(@PathVariable UUID accountId, @RequestParam int page, @RequestParam int size) {
+
+        Page<TransactionDto> ekstre = accountService.hesapGecmisi(accountId, page, size);
+
+        return ResponseEntity.ok(ekstre);
+
     }
 }
