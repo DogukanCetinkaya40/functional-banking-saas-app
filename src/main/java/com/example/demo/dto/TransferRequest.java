@@ -25,4 +25,7 @@ public class TransferRequest {
     @Digits(integer = 12,fraction = 2)
     private BigDecimal miktar;
 
+    @NotNull(message = "Döviz türü belirtilmlidir!")
+    private String doviz;
+
 }

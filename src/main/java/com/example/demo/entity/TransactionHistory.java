@@ -42,7 +42,4 @@ public class TransactionHistory extends BaseEntity {
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime islemTarihi;
-
-
-
 }

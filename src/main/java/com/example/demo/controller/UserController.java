@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserResponse;
 import com.example.demo.dto.UserSaveRequest;
-import com.example.demo.entity.User;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.service.UserService;

@@ -52,12 +52,12 @@ public class AccountService {
 
     public AccountResponse hesapBul (UUID id) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Şu ID sorgusuna ait hesap bulunamadı: " + id));
+                .orElseThrow(() -> new BusinessException("Şu ID sorgusuna ait hesap bulunamadı: " + id));
 
         return accountMapper.toResponse(account);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = BusinessException.class)
     public TransferResponse paraTransferi(TransferRequest request) {
 
         Account gonderen = accountRepository.findById(request.getGonderenID())
@@ -105,7 +105,7 @@ public class AccountService {
                 .build();
 
     }
-
+    @Transactional(readOnly = true, rollbackFor = BusinessException.class)
     public Page<TransactionDto> hesapGecmisi(UUID accountId, int page, int size) {
 
         Account account = accountRepository.findById(accountId)
